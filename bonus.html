@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <style>
+                         @import url('https://fonts.googleapis.com/css2?family=Henny+Penny&family=Pattaya&family=Roboto:wght@100;300;400;500;700&display=swap%27');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;1,400&display=swap');
+  
+       body{
+	font-size: 20px;
+	font-family: sans-serif;
+	color: #333;
+       
+        background: yellow;        ;
+        font-family: 'Roboto', sans-serif;
+        font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+         
+    
+}
+
+       a{
+       font-family: 'Pattaya'; 
+       font-size: 1.3rem;
+    
+
+     }
+
+      a:hover {
+                    color: blue !important;
+                }
+
+               
+                .collapse {
+                  margin-left: 38%;
+                }
+
+  
+    .foot{
+                      width: 15vw;
+                  height:10vh;
+                  margin:0 auto;
+                  color: yellow;
+                  text-align: center;
+                   display: flex;
+
+           
+                background-color: black;
+                border-radius: 15px;
+
+                }
+                footer{
+                   text-align: center !important;
+               justify-content: center;
+              align-items: center;
+              display: flex;
+
+                font-family: 'Henny Penny'; 
+                font-size: 1.5rem;
+
+                }
+                @media (max-width:700px) {
+    footer{ 
+    font-size:1rem;
+    }
+.foot{
+    width: 20vw;
+}}
+@media (max-width:400px) {
+    .foot{
+    width: 25vw;
+}}
+.question{
+	font-weight: 600;
+}
+.answers {
+  margin-bottom: 20px;
+}
+.answers label{
+  display: block;
+}
+#submit{
+	font-family: sans-serif;
+	font-size: 20px;
+	background-color: #279;
+	color: #fff;
+	border: 0px;
+	border-radius: 3px;
+	padding: 20px;
+	cursor: pointer;
+	margin-bottom: 20px;
+}
+#submit:hover{
+	background-color: #38a;
+}
+   </style>
+</head>
+<body>
+    <header>
+  
+
+   <nav class="navbar navbar-expand-lg navbar-light bg-dark ">
+  <div class="container-fluid ">
+     
+    <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+
+     </button> 
+      <div class="collapse navbar-collapse " id="navbarNav">
+      <ul class="navbar-nav  ">
+             <li class="nav-item">
+            <a class="navbar-brand" href="#"><img src="logo.png" width="30" height="40"></a>
+       
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active " aria-current="page" href="index.html"  style="color: yellow;">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="about.html" style="color: yellow;">about</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="media.html" style="color: yellow;" >media</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link " href="faq.html" style="color: yellow;">faq</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link " href="#" style="color: yellow;">contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+    </div>
+</nav>
+</header>
+
+<div class="container">
+  <div class="row">
+<div id="quiz"></div>
+<button id="submit">Submit Quiz</button>
+<div id="results"></div>
+</div>
+</div>
+<div class="foot">
+<footer>
+  &copy;Nimrod Faber
+</footer>
+</div>
+
+ <script>
+     (function(){
+  function buildQuiz(){
+  
+    const output = [];
+
+   
+    myQuestions.forEach(
+      (currentQuestion, questionNumber) => {
+
+        
+        const answers = [];
+
+      
+        for(letter in currentQuestion.answers){
+
+         
+          answers.push(
+            `<label>
+              <input type="radio" name="question${questionNumber}" value="${letter}">
+              ${letter} :
+              ${currentQuestion.answers[letter]}
+            </label>`
+          );
+        }
+
+       
+        output.push(
+          `<div class="question"> ${currentQuestion.question} </div>
+          <div class="answers"> ${answers.join('')} </div>`
+        );
+      }
+    );
+
+    
+    quizContainer.innerHTML = output.join('');
+  }
+
+  function showResults(){
+
+   
+    const answerContainers = quizContainer.querySelectorAll('.answers');
+
+   
+    let numCorrect = 0;
+
+  
+    myQuestions.forEach( (currentQuestion, questionNumber) => {
+
+      
+      const answerContainer = answerContainers[questionNumber];
+      const selector = `input[name=question${questionNumber}]:checked`;
+      const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+     
+      if(userAnswer === currentQuestion.correctAnswer){
+        
+        numCorrect++;
+
+       
+        answerContainers[questionNumber].style.color = 'lightgreen';
+      }
+     
+      else{
+       
+        answerContainers[questionNumber].style.color = 'red';
+      }
+    });
+
+   
+    resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
+  }
+
+  const quizContainer = document.getElementById('quiz');
+  const resultsContainer = document.getElementById('results');
+  const submitButton = document.getElementById('submit');
+  const myQuestions = [
+    {
+      question: "Which Italian city is famous for its carnival celebrations?",
+      answers: {
+        a: "napoli",
+        b: "rome",
+        c: "Venice"
+      },
+      correctAnswer: "c"
+    },
+    {
+      question: "Where was the first Mardi Gras parade in the United States?",
+      answers: {
+        a: "chicago,elinoy",
+        b: "neworlens",
+        c: "Mobile, Alabama"
+      },
+      correctAnswer: "c"
+    },
+    {
+      question: " In which year did Mardi Gras move its New Orleans celebration dates to not interfere with the Super Bowl?",
+      answers: {
+        a: "2010",
+        b: "2016",
+        c: "2005",
+        d: "2013"
+      },
+      correctAnswer: "d"
+    },
+     {
+      question: " The average float rider in New Orleans spends how much for their costume, beads and other souvenirs for Mardi Gras?",
+      answers: {
+        a: "750$",
+        b: "500$",
+        c: "120$",
+        d: "450$"
+      },
+      correctAnswer: "b"
+    },
+     {
+      question: " When did Louisiana declare Fat Tuesday a state holiday?",
+      answers: {
+        a: "1875",
+        b: "2016",
+        c: "2005",
+        d: "2013"
+      },
+      correctAnswer: "a"
+    },
+     {
+      question: "Mardi Gras beads used to be made of what material? ",
+      answers: {
+        a: "platinum",
+        b: "silver",
+        c: "gold",
+        d: " Glass"
+      },
+      correctAnswer: "d"
+    },
+     {
+      question: "How many times have Mardi Gras parades been canceled in New Orleans? ",
+      answers: {
+        a: "14",
+        b: "13",
+        c: "12",
+        d: "11"
+      },
+      correctAnswer: "b"
+    },
+     {
+      question: "On average, how many people typically visit New Orleans for Mardi Gras every year? ",
+      answers: {
+        a: "1.4 million",
+        b: "2.4 million",
+        c: "3.4 million",
+        d: "1.6 million"
+      },
+      correctAnswer: "a"
+    },
+     {
+      question: "When were floats first introduced to New Orleans Mardi Gras parades? ",
+      answers: {
+        a: "1894",
+        b: "1903",
+        c: "1857",
+        d: "1850"
+      },
+      correctAnswer: "c"
+    },
+     {
+      question: " What does green signify during Mardi Gras? ",
+      answers: {
+        a: "Faith",
+        b: "Justice",
+        c: "Power",
+        d: "2013"
+      },
+      correctAnswer: "a"
+    },
+  ];
+
+ 
+  buildQuiz();
+
+  
+  submitButton.addEventListener('click', showResults);
+})();
+ </script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+</body>
+</html>

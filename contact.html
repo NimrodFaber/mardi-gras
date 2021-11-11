@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <style>
+                         @import url('https://fonts.googleapis.com/css2?family=Henny+Penny&family=Pattaya&family=Roboto:wght@100;300;400;500;700&display=swap%27');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;1,400&display=swap');
+          body{
+        background: yellow;        ;
+        font-family: 'Roboto', sans-serif;
+        font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+         
+      }
+      p{
+         font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+      }
+    
+
+       a{
+       font-family: 'Pattaya'; 
+       font-size: 1.3rem;
+    
+
+     }
+
+      a:hover {
+                    color: blue !important;
+                }
+
+               
+                .collapse {
+                  margin-left: 38%;
+                }
+
+  
+    .foot{
+                      width: 15vw;
+                  height:10vh;
+                  margin:0 auto;
+                  color: yellow;
+                  text-align: center;
+                   display: flex;
+
+           
+                background-color: black;
+                border-radius: 15px;
+
+                }
+                footer{
+                   text-align: center !important;
+               justify-content: center;
+              align-items: center;
+              display: flex;
+
+                font-family: 'Henny Penny'; 
+                font-size: 1.5rem;
+
+                }
+                @media (max-width:700px) {
+    footer{ 
+    font-size:1rem;
+    }
+.foot{
+    width: 20vw;
+}}
+aside{
+     width: 50vw; 
+     height: 90vh;
+      border: black solid 1px; 
+      background-color: white; 
+     /*  margin: 0 auto; 
+      padding: auto; */
+      display: flex;     
+justify-content: center;
+            align-items: center;
+            flex-direction: row; 
+            align-content:center;
+}
+
+@media (max-width:400px) {
+    .foot{
+    width: 25vw;
+}}
+
+             @media (max-width:1000px) {
+  aside{
+      width: 80vw;
+      height: 70vh; 
+  }
+}
+    </style>
+</head>
+<body>
+           <header>
+  
+
+   <nav class="navbar navbar-expand-lg navbar-light bg-dark ">
+  <div class="container-fluid ">
+     
+    <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+
+     </button> 
+      <div class="collapse navbar-collapse " id="navbarNav">
+      <ul class="navbar-nav  ">
+             <li class="nav-item">
+            <a class="navbar-brand" href="#"><img src="logo.png" width="30" height="40"></a>
+       
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active " aria-current="page" href="index.html"  style="color: yellow;">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="about.html" style="color: yellow;">about</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="media.html" style="color: yellow;" >media</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link " href="faq.html" style="color: yellow;">faq</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link " href="#" style="color: yellow;">contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+    </div>
+</nav>
+</header>
+<div class="container" style="
+width: 100vw;
+height: 100vh;
+display: flex;     
+justify-content: center;
+            align-items: center;
+            flex-direction: row; 
+            align-content:center;
+">
+
+<aside>
+   <form name="myForm"  onsubmit="return validateForm(),validateemail()"     style="width: 50vw; margin-right: 3%; margin-left: 3%; ">
+        <label for="name">full name:</label>
+        <br><br>
+        <input type="name" name="fname" id="name">
+        <br><br>
+        <label for="email">email:</label>
+        <br><br>
+        <input type="email" name="usere" id="email" >
+        <br>
+        <label for="gender">gender:</label>
+        <br><br>
+        <input type="radio">male
+        <input type="radio">female
+        <input type="radio">undefined
+        <br>
+        <label for="text">write to us</label>
+        <br>
+<textarea maxlength="500"></textarea>
+<br>
+<div style="height: 10vh;">
+<input type="submit" value="send" id="btn">
+<input type="reset" value="reset" style="margin-left: 40%;">
+</div>
+    </form>
+</aside>
+</div>
+
+<div class="foot">
+<footer>
+  &copy;Nimrod Faber
+</footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+
+<script>
+function validateForm() {
+  let x = document.forms["myForm"]["fname"].value;
+  if (x == "") {
+    alert("Name must be filled out");
+    return false;
+  }
+};
+
+
+
+function validateemail() {
+  let y = document.forms["myForm"]["usere"].value;
+  if (y == "") {
+    alert("email must be filled out");
+    return false;
+  }
+}
+
+
+  document.getElementById('btn').addEventListener('click', go2);
+
+          function go2(){
+                let thename=document.getElementById("name").value
+
+        /* let theemail = document.getElementById("email").value  */
+            let newwindow =  window.open("","","width=500,height=500",)
+
+            newwindow.document.write("thank you "  + "" + thename  + " " + "we get your information ");}
+</script>
+</body>
+</html>
